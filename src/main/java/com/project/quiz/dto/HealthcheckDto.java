@@ -1,11 +1,18 @@
 package com.project.quiz.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+
 public class HealthcheckDto {
 
     private boolean status;
     private String message;
 
-    public HealthcheckDto(boolean status, String message){
+
+   /*public HealthcheckDto(boolean status, String message){
         this.status = status;
         this.message = message;
     }
@@ -16,5 +23,6 @@ public class HealthcheckDto {
 
     public String getMessage(){
         return message;
-    }
+    }*/
+
 }
