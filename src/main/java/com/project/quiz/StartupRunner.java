@@ -3,6 +3,7 @@ package com.project.quiz;
 import com.project.quiz.entities.PlayerEntity;
 
 import com.project.quiz.repositories.PlayerRepository;
+import com.project.quiz.services.QuizDataService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
@@ -20,7 +21,8 @@ public class StartupRunner implements CommandLineRunner {
 
     @Autowired
     //private EntityManager entityManager;
-    private PlayerRepository playerRepository;
+    //private PlayerRepository playerRepository;
+    private QuizDataService quizDataService;
 
     @Override
     //@Transactional
@@ -34,11 +36,11 @@ public class StartupRunner implements CommandLineRunner {
         entityManager.persist(player);
         log.info("Same player after persist: " + player);*/
 
-        playerRepository.save(new PlayerEntity("John"));
+     /*   playerRepository.save(new PlayerEntity("John"));
         playerRepository.save(new PlayerEntity("Harry"));
-        playerRepository.save(new PlayerEntity("George"));
+        playerRepository.save(new PlayerEntity("George"));*/
 
-        log.info("List of players from database: ");
+        //log.info("List of players from database: ");
        /* Query q = entityManager.createQuery("SELECT p FROM PLAYERS p");
         List<PlayerEntity> playersFromDb = (List<PlayerEntity>)q.getResultList();
 
@@ -46,10 +48,12 @@ public class StartupRunner implements CommandLineRunner {
             log.info("Player from Db: " + playerFromDb);
         }*/
 
-        List<PlayerEntity> playersFromDatabase = playerRepository.findAll();
+       /* List<PlayerEntity> playersFromDatabase = playerRepository.findAll();
         for (PlayerEntity player : playersFromDatabase) {
             log.info("Retrieved player: " + player);
         }
+*/
+        quizDataService.getQuizCategories();
 
     }
 }
