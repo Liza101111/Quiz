@@ -1,5 +1,6 @@
 package com.project.quiz.services;
 
+import com.project.quiz.dto.CategoriesDto;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
 public class QuizDataService {
     public void getQuizCategories(){
         RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject("https://opentdb.com/api_category.php", String.class);
-        log.info("Quiz categories: " + result);
+        CategoriesDto result = restTemplate.getForObject("https://opentdb.com/api_category.php", CategoriesDto.class);
+        log.info("Quiz categories: " + result.getCategories());
     }
 }
