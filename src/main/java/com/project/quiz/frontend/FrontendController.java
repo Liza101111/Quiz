@@ -1,7 +1,9 @@
 package com.project.quiz.frontend;
 
 
+import com.project.quiz.services.QuizDataService;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Log
 public class FrontendController {
 
+    @Autowired
+    private QuizDataService quizDataService;
+
     @GetMapping("/")
     public String hello(Model model) {
         model.addAttribute("message", "Welcome,have a nice day!");
@@ -21,6 +26,7 @@ public class FrontendController {
     @GetMapping("/select")
     public String select(Model model){
         model.addAttribute("gameOptions", new GameOptions());
+        model.addAttribute("categories", quizDataService.getQuizCategories());
         return "select";
     }
 
