@@ -1,4 +1,4 @@
-package com.project.quiz.controllers;
+package com.project.quiz.frontend;
 
 
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,7 @@ public class FrontendController {
 
     @GetMapping("/select")
     public String select(Model model){
+        model.addAttribute("gameOptions", new GameOptions());
         return "select";
     }
 
