@@ -24,7 +24,7 @@ public class OngoingGameService {
         this.gameOptions = gameOptions;
         this.currentQuestionIndex = 0;
         this.points = 0;
+        this.questions = quizDataService.getQuizQuestions(gameOptions);
 
-        quizDataService.getQuizQuestions();
     }
 }
