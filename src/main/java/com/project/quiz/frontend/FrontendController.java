@@ -1,6 +1,7 @@
 package com.project.quiz.frontend;
 
 
+import com.project.quiz.services.OngoingGameService;
 import com.project.quiz.services.QuizDataService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ public class FrontendController {
 
     @Autowired
     private QuizDataService quizDataService;
+    private OngoingGameService ongoingGameService;
 
     @GetMapping("/")
     public String hello(Model model) {
@@ -33,7 +35,18 @@ public class FrontendController {
     @PostMapping("/select")
     public String postSelectForm(Model model, @ModelAttribute GameOptions gameOptions) {
         log.info("Form submitted with data: " + gameOptions);
-        return "index";
+        ongoingGameService.init(gameOptions);
+        return "redirect:game";
+    }
+
+    @GetMapping("/game")
+    public String game(Model model) {
+        model.addAttribute("userAnswer", new UserAnswer());
+        model.addAttribute("currentQuestionNumber", ongoingGameService.getCurrentQuestionNumber());
+        model.addAttribute("totalQuestionNumber", ongoingGameService.getTotalQuestionNumber());
+        model.addAttribute("currentQuestion", ongoingGameService.getCurrentQuestion());
+        model.addAttribute("currentQuestionAnswers", ongoingGameService.getCurrentQuestionAnswersInRandomOrder());
+        return "game";
     }
 
 }
