@@ -1,6 +1,7 @@
 package com.project.quiz.services;
 
 import com.project.quiz.dto.QuestionsDto;
+import com.project.quiz.frontend.Difficulty;
 import com.project.quiz.frontend.GameOptions;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -8,10 +9,7 @@ import org.hibernate.sql.ast.tree.expression.Collation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 @Log
@@ -69,6 +67,18 @@ public class OngoingGameService {
     public boolean proceedToNextQuestion() {
         currentQuestionIndex++;
         return currentQuestionIndex < questions.size();
+    }
+
+    public Difficulty getDifficulty(){
+        return gameOptions.getDifficulty();
+    }
+
+    public String getCategoryName() {
+        Optional<String> category = quizDataService.getQuizCategories().stream()
+                .filter(categoryDto -> categoryDto.getId() == gameOptions.getCategoryId())
+                .map(categoryDto -> categoryDto.getName())
+                .findAny();
+        return category.orElse(null);
     }
 
 }
