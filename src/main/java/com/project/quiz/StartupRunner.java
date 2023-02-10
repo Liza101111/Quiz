@@ -54,7 +54,7 @@ public class StartupRunner implements CommandLineRunner {
         }
 */
         quizDataService.getQuizCategories();
-        quizDataService.getQuizQuestions();
+        //quizDataService.getQuizQuestions();
 
     }
 }
