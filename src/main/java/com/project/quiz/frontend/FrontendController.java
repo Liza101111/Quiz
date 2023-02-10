@@ -17,6 +17,7 @@ public class FrontendController {
 
     @Autowired
     private QuizDataService quizDataService;
+    @Autowired
     private OngoingGameService ongoingGameService;
 
     @GetMapping("/")
