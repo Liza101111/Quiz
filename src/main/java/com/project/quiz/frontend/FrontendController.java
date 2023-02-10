@@ -50,4 +50,15 @@ public class FrontendController {
         return "game";
     }
 
+    @PostMapping("/game")
+    public String postSelectForm(Model model, @ModelAttribute UserAnswer userAnswer) {
+        ongoingGameService.checkAnswerForCurrentQuestionAndUpdatePoints(userAnswer.getAnswer());
+        boolean hasNextQuestion = ongoingGameService.proceedToNextQuestion();
+        if(hasNextQuestion) {
+            return "redirect:game";
+        }else{
+            return "redirect:";
+        }
+    }
+
 }
